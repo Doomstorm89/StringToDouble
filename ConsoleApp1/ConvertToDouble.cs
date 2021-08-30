@@ -7,12 +7,12 @@ namespace ConsoleApp1
     public static class ConvertToDouble
     {
         private const double MaxValue = 1.7976931348623157E+308;
-        private static readonly Regex DoubleRegex = new(@"-?\d+(\.|,\d{1,x})?", RegexOptions.Compiled);
+        private static readonly Regex DoubleRegex = new(@"^[-+]?\d+(\.|\,\d+)?$", RegexOptions.Compiled);
 
         public static double ToDouble(this string s)
         {
             if (string.IsNullOrEmpty(s) || string.IsNullOrWhiteSpace(s)) throw new ArgumentNullException();
-            if (DoubleRegex.IsMatch(s) == false) throw new ArgumentException();
+            if (DoubleRegex.IsMatch(s) == false) throw new ArgumentException(); 
 
             if (HasSeparator(s))
                 return StringToNumberWithSeparator(s);
